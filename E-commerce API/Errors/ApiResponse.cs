@@ -6,6 +6,7 @@
         {
             StatusCode = statusCode;
             Message = message ?? GetDefaultMessageForStatusCode(statusCode);
+            // "??" this is null coalescing operator, this means if left side value is null then execute right side value
         }
 
         public int StatusCode {  get; set; }
@@ -19,7 +20,7 @@
                 401 => "Authorized, you are not",
                 404 => "Resource found, it was not",
                 500 => "Error are the path of learning",
-                _ => null,
+                _ => null, // symbol _ means default
             };
         }
 

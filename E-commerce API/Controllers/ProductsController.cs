@@ -2,10 +2,13 @@
 using Core.Interfaces;
 using Core.Specifications;
 using E_commerce_API.Dtos;
+using E_commerce_API.Errors;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel;
+
 
 namespace E_commerce_API.Controllers
 {
@@ -54,7 +57,9 @@ namespace E_commerce_API.Controllers
         }
         
         [HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(int id)
+        // [ProducesResponseType(StatusCodes.Status200OK)]
+        // [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        // //public async Task<ActionResult<Product>> GetProduct(int id)
          public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             // return await _repo.GetProductByIdAsync(id);
@@ -64,6 +69,7 @@ namespace E_commerce_API.Controllers
            // return await _productsRepo.GetEntityWithSpec(spec);
             var product = await _productsRepo.GetEntityWithSpec(spec);
 
+            if(product == null) return NotFound(new ApiResponse(404));
             return new ProductToReturnDto
             {
                 Id = product.Id,

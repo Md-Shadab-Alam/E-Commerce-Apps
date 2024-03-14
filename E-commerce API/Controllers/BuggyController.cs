@@ -24,15 +24,6 @@ namespace E_commerce_API.Controllers
             return Ok();
         }
 
-
-        [HttpGet("servererror")]
-        public ActionResult GetServerError()
-        {
-            var thing = _context.Products.Find(42);
-            var thingToReturn = thing.ToString();
-            return Ok();
-        }
-
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
@@ -43,6 +34,15 @@ namespace E_commerce_API.Controllers
         public ActionResult GetBadRequest(int id)
         {
             return BadRequest();
+        }
+
+
+        [HttpGet("servererror")]
+        public ActionResult GetServerError()
+        {
+            var thing = _context.Products.Find(42);
+            var thingToReturn = thing.ToString();
+            return Ok();
         }
 
     }
