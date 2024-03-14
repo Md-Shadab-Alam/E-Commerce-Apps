@@ -23,6 +23,8 @@ namespace Infrastructure.Data
 		}
 		public async Task<IReadOnlyList<Product>> GetProductsAsync()
 		{
+
+
 			return await _context.Products
 				.Include(p=>p.ProductType)          //Navigation Property
                 .Include(p=>p.ProductBrand)
