@@ -36,11 +36,12 @@ namespace E_commerce_API.Controllers
 
         [HttpGet]
         //public async Task<ActionResult<List<Product>>> GetProducts()
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(string sort)
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts(
+           [FromQuery] ProductSpecParams productPrams)
 
         {
             //var products = await _repo.GetProductsAsync();
-            var spec = new ProductWithTypesAndBrandsSpecification(sort);
+            var spec = new ProductWithTypesAndBrandsSpecification(productPrams);
 
             var products = await _productsRepo.ListAsync(spec);
             //return Ok(products);
